@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual do Calouro</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="mesh"></div>
+  <div class="noise"></div>
+
+  <header class="floating-nav" id="navbar">
+    <div class="nav-shell">
+      <div class="brand">
+        <div class="brand-mark">MC</div>
+        <div class="brand-copy">
+          <strong>Manual do Calouro</strong>
+          <span>Seu guia para começar a vida universitária</span>
+        </div>
+      </div>
+
+      <nav class="nav-links" aria-label="Navegação principal">
+        <!-- <a href="#home">Início</a>
+        <a href="#areas">Áreas</a> -->
+        <a href="#audio-guides">Guias</a>
+        <a href="#downloads">Downloads</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn mobile-toggle" id="menuToggle" aria-label="Abrir navegação">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+            <path d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+        <a class="ghost-btn" href="#areas">Explorar tópicos</a>
+        <!-- <a class="cta" href="#downloads">Baixar kit inicial
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"/>
+            <path d="m13 5 7 7-7 7"/>
+          </svg>
+        </a> -->
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page active" id="homePage">
+      <section class="hero reveal" id="home">
+        <div class="hero-panel">
+          <div class="slides" id="slidesContainer"></div>
+        </div>
+
+        <div class="hero-copy">
+          <div class="hero-top">
+            <span class="eyebrow">Sobrevivência universitária, mas melhor</span>
+            <h1>Tudo o que um calouro precisa, em um só lugar.</h1>
+            <p>
+              Uma plataforma digital moderna para ajudar novos estudantes a entender o mundo acadêmico,
+              a vida no campus, os serviços de apoio, as rotinas de estudo e os pequenos detalhes práticos
+              que tornam o primeiro semestre mais tranquilo.
+            </p>
+            <div class="stat-row">
+              <div class="stat">
+                <strong>4</strong>
+                <span>Áreas iniciais na página principal</span>
+              </div>
+              <div class="stat">
+                <strong>Áudio</strong>
+                <span>Explicações em áudio para cada tema</span>
+              </div>
+              <div class="stat">
+                <strong>Arquivos</strong>
+                <span>Downloads rápidos e materiais práticos</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-bottom">
+            <a class="cta" href="#areas">Explorar o guia
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14"/>
+                <path d="m13 5 7 7-7 7"/>
+              </svg>
+            </a>
+            <button class="ghost-btn" id="randomTopicBtn">Me surpreenda</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="cards-wrap reveal" id="areas">
+        <div class="section-head">
+          <div>
+            <span class="eyebrow">Explore os temas essenciais</span>
+            <h3>Comece pelas áreas que todo calouro normalmente quer entender primeiro.</h3>
+          </div>
+          <p>
+            Cada card abre uma página focada com imagem de destaque, explicação curta,
+            suporte em áudio e download direto de material prático.
+          </p>
+        </div>
+
+        <div class="card-grid" id="cardGrid"></div>
+      </section>
+
+      <footer class="footer reveal">
+        <div class="footer-inner">
+          <span id="audio-guides">Feito para ser claro, útil e acolhedor desde o primeiro clique.</span>
+          <span id="downloads">Conceito da plataforma Manual do Calouro · HTML, CSS e JavaScript</span>
+        </div>
+      </footer>
+    </section>
+
+    <section class="page" id="detailPage" aria-live="polite">
+      <div class="detail-shell reveal">
+        <div class="detail-topbar">
+          <button class="back-btn" id="backBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m15 18-6-6 6-6"/>
+            </svg>
+            Voltar ao início
+          </button>
+          <span class="eyebrow" id="detailCategory">Área do guia</span>
+        </div>
+
+        <div class="detail-grid">
+          <div class="detail-media">
+            <iframe 
+              id="detailVideo" 
+              src="" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="detail-copy">
+            <div>
+              <span class="eyebrow" id="detailEyebrow">Tema</span>
+              <h1 id="detailTitle">Título</h1>
+              <p id="detailLead">Texto de introdução</p>
+            </div>
+
+            <div class="play-wrap">
+              <button class="play-btn" id="playNarrationBtn" aria-label="Reproduzir áudio do guia">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5.14v13.72c0 .79.87 1.27 1.54.84l10.18-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14Z"/>
+                </svg>
+              </button>
+              <div>
+                <strong>Ouça o tema</strong>
+                <p class="inline-note">Uma versão narrada rápida para facilitar o consumo do conteúdo.</p>
+              </div>
+            </div>
+
+            <div class="meta-grid">
+              <div class="meta-item">
+                <strong>Formato</strong>
+                <span id="detailFormat">Áudio + PDF</span>
+              </div>
+              <div class="meta-item">
+                <strong>Duração</strong>
+                <span id="detailDuration">4 min</span>
+              </div>
+              <div class="meta-item">
+                <strong>Ideal para</strong>
+                <span id="detailBestFor">Primeira semana</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-content">
+          <div class="detail-description">
+            <h2>O que esta seção aborda</h2>
+            <p id="detailDescription"></p>
+          </div>
+
+          <div class="audio-card">
+            <div>
+              <h2>Guia em áudio</h2>
+              <div class="audio-meta">
+                <span id="audioLabel">Visão geral amigável</span>
+                <span id="audioTime">Aprox. 04:00</span>
+              </div>
+            </div>
+            <audio id="detailAudio" controls preload="none">
+              <source id="detailAudioSource" src="" type="audio/mpeg" />
+              Seu navegador não oferece suporte ao elemento de áudio.
+            </audio>
+            <span class="download-note">Dica: substitua o áudio de exemplo e o link de download pelos seus arquivos reais depois.</span>
+          </div>
+        </div>
+
+        <div class="download-block">
+          <div>
+            <strong>Baixe o material de apoio</strong>
+            <p class="download-note" id="downloadText">Acesse um arquivo simples com notas-chave, links e lembretes deste tema.</p>
+          </div>
+          <a class="download-btn" id="downloadBtn" href="#" download>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3v12"/>
+              <path d="m7 10 5 5 5-5"/>
+              <path d="M5 21h14"/>
+            </svg>
+            Baixar arquivo
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
