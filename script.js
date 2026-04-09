@@ -66,7 +66,6 @@ const navbar = document.getElementById('navbar');
     }
 
     function fillDetailPage(topic) {
-      document.getElementById('detailCategory').textContent = topic.category;
       document.getElementById('detailEyebrow').textContent = topic.category;
       document.getElementById('detailTitle').textContent = topic.title;
       document.getElementById('detailLead').textContent = topic.lead;
@@ -76,7 +75,6 @@ const navbar = document.getElementById('navbar');
       document.getElementById('detailBestFor').textContent = topic.bestFor;
       document.getElementById('audioLabel').textContent = topic.audioLabel;
       document.getElementById('audioTime').textContent = `Aprox. ${topic.duration}`;
-      document.getElementById('downloadText').textContent = topic.downloadText;
 
       const detailVideo = document.getElementById('detailVideo');
       
@@ -163,6 +161,8 @@ const navbar = document.getElementById('navbar');
     function setupNarrationButton() {
       const playBtn = document.getElementById('playNarrationBtn');
       const audio = document.getElementById('detailAudio');
+      
+      if (!playBtn) return;
 
       playBtn.addEventListener('click', async () => {
         try {
