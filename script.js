@@ -65,14 +65,63 @@ const navbar = document.getElementById('navbar');
       return platformData.topics.find(topic => topic.id === id);
     }
 
-    function fillDetailPage(topic) {
+    function formatBoldText(text) {
+      return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    }
+
+    function fillDetailPageSections(topic) {
       document.getElementById('detailEyebrow').textContent = topic.category;
       document.getElementById('detailTitle').textContent = topic.title;
       document.getElementById('detailLead').textContent = topic.lead;
-      document.getElementById('detailDescription').textContent = topic.description;
       document.getElementById('detailFormat').textContent = topic.format;
       document.getElementById('detailDuration').textContent = topic.duration;
-      document.getElementById('detailBestFor').textContent = topic.bestFor;
+      document.getElementById('audioLabel').textContent = topic.audioLabel;
+      document.getElementById('audioTime').textContent = `Aprox. ${topic.duration}`;
+
+      const detailVideo = document.getElementById('detailVideo');
+      
+      if (detailVideo && topic.youtubeId) {
+        const youtubeUrl = `https://www.youtube.com/embed/${topic.youtubeId}?rel=0&modestbranding=1`;
+        detailVideo.src = youtubeUrl;
+      }
+
+      const detailDescription = document.getElementById('detailDescription');
+      if (topic.sections && Array.isArray(topic.sections)) {
+        const sectionsHTML = topic.sections.map(section => `
+          <div class="section-item">
+            <h3>${section.heading}</h3>
+            ${section.paragraphs.map(para => `<p>${formatBoldText(para)}</p>`).join('')}
+          </div>
+        `).join('');
+        detailDescription.innerHTML = sectionsHTML;
+      } else {
+        detailDescription.textContent = topic.description || '';
+      }
+
+      const audioSource = document.getElementById('detailAudioSource');
+      const detailAudio = document.getElementById('detailAudio');
+      audioSource.src = topic.audio;
+      detailAudio.load();
+
+      const downloadBtn = document.getElementById('downloadBtn');
+      downloadBtn.href = topic.download;
+      downloadBtn.setAttribute('download', `${topic.id}.pdf`);
+    }
+
+    function fillDetailPage(topic) {
+      // Check if this topic uses the title-sections layout
+      if (topic.layout === 'title-sections') {
+        fillDetailPageSections(topic);
+        return;
+      }
+
+      // Default layout rendering
+      document.getElementById('detailEyebrow').textContent = topic.category;
+      document.getElementById('detailTitle').textContent = topic.title;
+      document.getElementById('detailLead').textContent = topic.lead;
+      document.getElementById('detailDescription').innerHTML = formatBoldText(topic.description);
+      document.getElementById('detailFormat').textContent = topic.format;
+      document.getElementById('detailDuration').textContent = topic.duration;
       document.getElementById('audioLabel').textContent = topic.audioLabel;
       document.getElementById('audioTime').textContent = `Aprox. ${topic.duration}`;
 
