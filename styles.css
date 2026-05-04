@@ -520,6 +520,8 @@
         transform 340ms var(--ease-snappy),
         border-color 340ms var(--ease-smooth),
         box-shadow 340ms var(--ease-smooth);
+      text-decoration: none;
+      color: inherit;
     }
 
     .info-card::before {
@@ -591,6 +593,7 @@
       font-size: 1.7rem;
       letter-spacing: -0.03em;
       color: #ffffff;
+      text-decoration: none;
     }
 
     .card-copy p {
@@ -735,7 +738,7 @@
       margin-top: 18px;
       padding: 24px;
       display: grid;
-      grid-template-columns: 1fr 0.98fr;
+      grid-template-columns: 1fr;
       gap: 18px;
     }
 
