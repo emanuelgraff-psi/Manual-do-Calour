@@ -125,11 +125,135 @@
     </section>
   </main>
 
-  <script type="module">
-    import { loadTopicPage, setupScrollNav, setupMobileMenu } from './detail-page.js';
-    loadTopicPage('organizacao-rotina');
-    setupScrollNav();
-    setupMobileMenu();
+  <script>
+    let platformData = null;
+    const topicId = 'organizacao-rotina';
+
+    async function loadDataFromFile() {
+      try {
+        const dataModule = await import('./data.js');
+        platformData = dataModule.platformData;
+        console.log('Data loaded via import');
+        loadTopicPage(topicId);
+      } catch (error) {
+        console.warn('Import failed, trying eval:', error);
+        try {
+          const response = await fetch('./data.js');
+          const text = await response.text();
+          const match = text.match(/export const platformData = ({[\s\S]*});/);
+          if (match) {
+            platformData = eval('(' + match[1] + ')');
+            console.log('Data loaded via eval');
+            loadTopicPage(topicId);
+          }
+        } catch (e) {
+          console.error('All load methods failed:', e);
+          document.getElementById('detailDescription').innerHTML = '<p style="color: red; padding: 20px;">⚠️ Error loading content. Try refreshing.</p>';
+        }
+      }
+    }
+
+    function formatBoldText(text) {
+      return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    }
+
+    function getTopicById(id) {
+      return platformData ? platformData.topics.find(t => t.id === id) : null;
+    }
+
+    function fillDetailPageSections(topic) {
+      try {
+        document.getElementById('detailEyebrow').textContent = topic.category || '';
+        document.getElementById('detailTitle').textContent = topic.title || '';
+        document.getElementById('detailLead').textContent = topic.lead || '';
+        document.getElementById('detailFormat').textContent = topic.format || '';
+        document.getElementById('detailDuration').textContent = topic.duration || '';
+        document.getElementById('audioLabel').textContent = topic.audioLabel || '';
+        document.getElementById('audioTime').textContent = `Aprox. ${topic.duration || ''}`;
+
+        if (topic.youtubeId) {
+          document.getElementById('detailVideo').src = `https://www.youtube.com/embed/${topic.youtubeId}?rel=0&modestbranding=1`;
+        }
+
+        if (topic.sections && Array.isArray(topic.sections)) {
+          const sectionsHTML = topic.sections.map(section => `
+            <div class="section-item">
+              <h3>${section.heading || ''}</h3>
+              ${section.paragraphs.map(p => `<p>${formatBoldText(p)}</p>`).join('')}
+            </div>
+          `).join('');
+          document.getElementById('detailDescription').innerHTML = sectionsHTML;
+        }
+
+        if (topic.audio) {
+          document.getElementById('detailAudioSource').src = topic.audio;
+          document.getElementById('detailAudio').load();
+        }
+
+        if (topic.download) {
+          const btn = document.getElementById('downloadBtn');
+          btn.href = topic.download;
+          btn.setAttribute('download', `${topic.id}.pdf`);
+        }
+
+        console.log('✓ Content loaded:', topic.title);
+      } catch (err) {
+        console.error('Error filling page:', err);
+      }
+    }
+
+    function loadTopicPage(topicId) {
+      const topic = getTopicById(topicId);
+      if (!topic) {
+        console.error(`Topic "${topicId}" not found`);
+        document.getElementById('detailDescription').innerHTML = '<p style="color: red;">Topic not found.</p>';
+        return;
+      }
+      fillDetailPageSections(topic);
+      document.querySelectorAll('.reveal').forEach((el, i) => {
+        if (!el.classList.contains('visible')) el.classList.add('visible');
+      });
+    }
+
+    function setupScrollNav() {
+      const navbar = document.getElementById('navbar');
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        const currentY = window.scrollY;
+        navbar.classList.toggle('scrolled', currentY > 10);
+        if (currentY > lastScrollY && currentY > 160) {
+          navbar.classList.add('hidden');
+        } else {
+          navbar.classList.remove('hidden');
+        }
+        lastScrollY = currentY;
+      }, { passive: true });
+    }
+
+    function setupMobileMenu() {
+      const menuToggle = document.getElementById('menuToggle');
+      menuToggle?.addEventListener('click', () => {
+        const navLinks = document.querySelector('.nav-links');
+        const isOpen = navLinks.dataset.open === 'true';
+        if (window.innerWidth > 1080) {
+          navLinks.style.display = 'flex';
+          navLinks.dataset.open = 'false';
+          return;
+        }
+        navLinks.style.display = isOpen ? 'none' : 'flex';
+        if (!isOpen) {
+          navLinks.style.width = '100%';
+          navLinks.style.flexDirection = 'column';
+        }
+        navLinks.dataset.open = isOpen ? 'false' : 'true';
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setupScrollNav();
+      setupMobileMenu();
+      loadDataFromFile();
+    });
   </script>
 </body>
 </html>
