@@ -263,17 +263,20 @@
     }
 
     .page {
-      display: block;
+      max-height: 0;
+      overflow: hidden;
       opacity: 0;
       pointer-events: none;
       transform: translateY(16px);
-      transition: opacity 380ms var(--ease-smooth), transform 380ms var(--ease-smooth);
+      transition: opacity 380ms var(--ease-smooth), transform 380ms var(--ease-smooth), max-height 0ms 380ms;
     }
 
     .page.active {
+      max-height: 9999px;
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
+      transition: opacity 380ms var(--ease-smooth), transform 380ms var(--ease-smooth), max-height 0ms 0ms;
     }
 
     .hero {
