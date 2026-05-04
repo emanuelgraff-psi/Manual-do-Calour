@@ -6,7 +6,7 @@ const navbar = document.getElementById('navbar');
     const homePage = document.getElementById('homePage');
     const detailPage = document.getElementById('detailPage');
     const backBtn = document.getElementById('backBtn');
-    const randomTopicBtn = document.getElementById('randomTopicBtn');
+    // const randomTopicBtn = document.getElementById('randomTopicBtn');
     const menuToggle = document.getElementById('menuToggle');
 
     let activeSlide = 0;
@@ -298,7 +298,7 @@ const navbar = document.getElementById('navbar');
       setupMobileMenu();
 
       if (backBtn) backBtn.addEventListener('click', showHomePage);
-      if (randomTopicBtn) randomTopicBtn.addEventListener('click', openRandomTopic);
+      // if (randomTopicBtn) randomTopicBtn.addEventListener('click', openRandomTopic);
     }
 
     init();
