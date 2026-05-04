@@ -66,7 +66,10 @@ const navbar = document.getElementById('navbar');
     }
 
     function formatBoldText(text) {
-      return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      // Handle bold text and newlines
+      return text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n/g, '<br>');
     }
 
     function fillDetailPageSections(topic) {
@@ -294,8 +297,8 @@ const navbar = document.getElementById('navbar');
       setupNarrationButton();
       setupMobileMenu();
 
-      backBtn.addEventListener('click', showHomePage);
-      randomTopicBtn.addEventListener('click', openRandomTopic);
+      if (backBtn) backBtn.addEventListener('click', showHomePage);
+      if (randomTopicBtn) randomTopicBtn.addEventListener('click', openRandomTopic);
     }
 
     init();
