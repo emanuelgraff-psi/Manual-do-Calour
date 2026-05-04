@@ -262,23 +262,6 @@
       padding: 116px 0 48px;
     }
 
-    .page {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(16px);
-      transition: opacity 380ms var(--ease-smooth), transform 380ms var(--ease-smooth), max-height 0ms 380ms;
-    }
-
-    .page.active {
-      max-height: 9999px;
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-      transition: opacity 380ms var(--ease-smooth), transform 380ms var(--ease-smooth), max-height 0ms 0ms;
-    }
-
     .hero {
       display: grid;
       grid-template-columns: 1.12fr 0.88fr;
@@ -628,6 +611,11 @@
       color: var(--primary);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
+    }
+
+    .detail-page {
+      min-height: 100vh;
+      width: 100%;
     }
 
     .detail-shell {

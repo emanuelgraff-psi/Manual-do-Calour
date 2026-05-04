@@ -109,87 +109,8 @@ Este projeto foi criado como um espaço informativo e acolhedor para calouros, r
         </div>
       </footer>
     </section>
-
-    <section class="page" id="detailPage" aria-live="polite">
-      <div class="detail-shell reveal">
-        <div class="detail-topbar">
-          <button class="back-btn" id="backBtn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m15 18-6-6 6-6"/>
-            </svg>
-            Voltar ao início
-          </button>
-        </div>
-
-        <div class="detail-grid">
-          <div class="detail-media">
-            <iframe 
-              id="detailVideo" 
-              src="" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-            </iframe>
-          </div>
-
-          <div class="detail-copy">
-            <div>
-              <span class="eyebrow" id="detailEyebrow">Tema</span>
-              <h1 id="detailTitle">Título</h1>
-              <p id="detailLead">Texto de introdução</p>
-            </div>
-
-            <div class="meta-grid">
-              <div class="meta-item">
-                <strong>Formato</strong>
-                <span id="detailFormat">Áudio + PDF</span>
-              </div>
-              <div class="meta-item">
-                <strong>Duração</strong>
-                <span id="detailDuration">4 min</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="detail-content">
-          <div class="audio-card">
-            <div>
-              <h2>Guia em áudio</h2>
-              <div class="audio-meta">
-                <span id="audioLabel">Visão geral amigável</span>
-                <span id="audioTime">Aprox. 04:00</span>
-              </div>
-            </div>
-            <audio id="detailAudio" controls preload="none">
-              <source id="detailAudioSource" src="" type="audio/mpeg" />
-              Seu navegador não oferece suporte ao elemento de áudio.
-            </audio>
-          </div>
-
-          <div class="detail-description">
-            <h2>O que esta seção aborda</h2>
-            <div id="detailDescription"></div>
-          </div>
-        </div>
-
-        <div class="download-block">
-          <div>
-            <strong>Baixe o mapa mental</strong>
-          </div>
-          <a class="download-btn" id="downloadBtn" href="#" download>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 3v12"/>
-              <path d="m7 10 5 5 5-5"/>
-              <path d="M5 21h14"/>
-            </svg>
-            Baixar arquivo
-          </a>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <script type="module" src="script.js"></script>
+  <script type="module" src="homepage.js"></script>
 </body>
 </html>
